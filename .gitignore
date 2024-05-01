@@ -1,1 +1,10 @@
-/node_modules
+# OSX
+#
+.DS_Store
+
+#.env 
+.env
+
+# node.js
+#
+node_modules/
