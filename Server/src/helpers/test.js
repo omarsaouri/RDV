@@ -1,5 +1,1 @@
-// HashChangeEventsa
-// statusbars
-// statusbar
-
-
+bonsoir.js
