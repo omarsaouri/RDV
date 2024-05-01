@@ -1,1 +1,1 @@
-hamizo.js
+hamizo1.js;
