@@ -1,1 +1,1 @@
-allo.js;
+salut
