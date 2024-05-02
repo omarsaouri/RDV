@@ -11,4 +11,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use("/rdv", rdvRouter);
+app.use("/auth", authRouter);
+
 app.listen(port, () => console.log(`App listening at ${port}`));
