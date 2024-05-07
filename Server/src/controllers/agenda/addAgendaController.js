@@ -1,6 +1,6 @@
 const supabase = require("../../models/supabase");
 
-const ajouterAgenda = async (req, res) => {
+const addAgenda = async (req, res) => {
   const { nomAgenda, quotaMax, idSpecialite } = req.body;
 
   try {
@@ -18,4 +18,4 @@ const ajouterAgenda = async (req, res) => {
   }
 };
 
-module.exports = ajouterAgenda;
+module.exports = addAgenda;

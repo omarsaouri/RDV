@@ -1,6 +1,6 @@
 const supabase = require("../../models/supabase");
 
-const ajouterAdministrateurUnite = async (req, res) => {
+const addAdministrateurUnite = async (req, res) => {
   const { nomComplet, email, password, idUnite } = req.body;
 
   try {
@@ -22,4 +22,4 @@ const ajouterAdministrateurUnite = async (req, res) => {
   }
 };
 
-module.exports = ajouterAdministrateurUnite;
+module.exports = addAdministrateurUnite;

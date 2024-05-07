@@ -3,19 +3,19 @@ const adminUnitRouter = express.Router();
 const authMiddleware = require("../middlewares/authMiddleware");
 
 const {
-  ajouterAdministrateurUnite,
-  supprimerAdministrateurUnite,
-  modifierAdministrateurUnite,
+  addAdministrateurUnite,
+  deleteAdministrateurUnite,
+  updateAdministrateurUnite,
   getAllAdministrateurUnite,
   getAdministrateurUniteById,
 } = require("../controllers/administrateurUnite");
 
 adminUnitRouter.use(authMiddleware);
 
-adminUnitRouter.post("/", ajouterAdministrateurUnite);
+adminUnitRouter.post("/", addAdministrateurUnite);
 adminUnitRouter.get("/", getAllAdministrateurUnite);
 adminUnitRouter.get("/:id", getAdministrateurUniteById);
-adminUnitRouter.put("/:id", modifierAdministrateurUnite);
-adminUnitRouter.delete("/:id", supprimerAdministrateurUnite);
+adminUnitRouter.put("/:id", updateAdministrateurUnite);
+adminUnitRouter.delete("/:id", deleteAdministrateurUnite);
 
 module.exports = adminUnitRouter;

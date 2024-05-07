@@ -3,19 +3,19 @@ const uniteRouter = express.Router();
 const authMiddleware = require("../middlewares/authMiddleware");
 
 const {
-  ajouterUnite,
-  supprimerUnite,
-  modifierUnite,
+  addUnite,
+  deleterUnite,
+  updateUnite,
   getAllUnites,
   getUniteParId,
 } = require("../controllers/unite");
 
 uniteRouter.use(authMiddleware);
 
-uniteRouter.post("/", ajouterUnite);
+uniteRouter.post("/", addUnite);
 uniteRouter.get("/", getAllUnites);
-uniteRouter.get("/:id", getAllParId);
-uniteRouter.put("/:id", modifierUnite);
-uniteRouter.delete("/:id", supprimerUnite);
+uniteRouter.get("/:id", getUniteParId);
+uniteRouter.put("/:id", updateUnite);
+uniteRouter.delete("/:id", deleterUnite);
 
 module.exports = uniteRouter;

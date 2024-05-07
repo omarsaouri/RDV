@@ -3,19 +3,19 @@ const specialiteRouter = express.Router();
 const authMiddleware = require("../middlewares/authMiddleware");
 
 const {
-  ajouterSpecialite,
-  supprimerSpecialite,
-  modifierSpecialite,
+  addSpecialite,
+  deleteSpecialite,
+  updateSpecialite,
   getAllSpecialites,
   getSpecialiteParId,
 } = require("../controllers/specialite");
 
 specialiteRouter.use(authMiddleware);
 
-specialiteRouter.post("/", ajouterSpecialite);
+specialiteRouter.post("/", addSpecialite);
 specialiteRouter.get("/", getAllSpecialites);
 specialiteRouter.get("/:id", getSpecialiteParId);
-specialiteRouter.put("/:id", modifierSpecialite);
-specialiteRouter.delete("/:id", supprimerSpecialite);
+specialiteRouter.put("/:id", updateSpecialite);
+specialiteRouter.delete("/:id", deleteSpecialite);
 
 module.exports = specialiteRouter;

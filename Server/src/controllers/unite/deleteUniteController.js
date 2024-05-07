@@ -1,6 +1,6 @@
 const supabase = require("../../models/supabase");
 
-const supprimerUnite = async (req, res) => {
+const deleterUnite = async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -16,4 +16,4 @@ const supprimerUnite = async (req, res) => {
   }
 };
 
-module.exports = supprimerUnite;
+module.exports = deleterUnite;

@@ -1,6 +1,6 @@
 const supabase = require("../../models/supabase");
 
-const supprimerAdministrateurUnite = async (req, res) => {
+const deleteAdministrateurUnite = async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -21,4 +21,4 @@ const supprimerAdministrateurUnite = async (req, res) => {
   }
 };
 
-module.exports = supprimerAdministrateurUnite;
+module.exports = deleteAdministrateurUnite;
