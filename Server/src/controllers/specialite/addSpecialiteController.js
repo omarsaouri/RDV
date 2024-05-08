@@ -18,4 +18,4 @@ const addSpecialite = async (req, res) => {
   }
 };
 
-module.exports = addSpecialite;
+module.exports = {addSpecialite};
