@@ -1,6 +1,6 @@
 const supabase = require("../../models/supabase");
 
-const deleteSpecialite = async (req, res) => {
+const supprimerSpecialite = async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -16,4 +16,4 @@ const deleteSpecialite = async (req, res) => {
   }
 };
 
-module.exports = deleteSpecialite;
+module.exports = { supprimerSpecialite };

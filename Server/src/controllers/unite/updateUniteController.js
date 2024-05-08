@@ -1,6 +1,6 @@
 const supabase = require("../../models/supabase");
 
-const updateUnite = async (req, res) => {
+const modifierUnite = async (req, res) => {
   const { id } = req.params;
   const { nomUnite } = req.body;
 
@@ -20,4 +20,4 @@ const updateUnite = async (req, res) => {
   }
 };
 
-module.exports = updateUnite;
+module.exports = { modifierUnite };

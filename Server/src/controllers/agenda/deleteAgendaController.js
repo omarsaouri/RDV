@@ -1,6 +1,6 @@
 const supabase = require("../../models/supabase");
 
-const deleteAgenda = async (req, res) => {
+const supprimerAgenda = async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -16,4 +16,4 @@ const deleteAgenda = async (req, res) => {
   }
 };
 
-module.exports = deleteAgenda;
+module.exports = { supprimerAgenda };

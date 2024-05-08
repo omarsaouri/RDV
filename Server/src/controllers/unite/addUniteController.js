@@ -1,6 +1,6 @@
 const supabase = require("../../models/supabase");
 
-const addUnite = async (req, res) => {
+const ajouterUnite = async (req, res) => {
   const { nomUnite } = req.body;
 
   try {
@@ -16,4 +16,4 @@ const addUnite = async (req, res) => {
   }
 };
 
-module.exports = addUnite;
+module.exports = { ajouterUnite };

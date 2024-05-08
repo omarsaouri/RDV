@@ -7,8 +7,7 @@ const getAllAdministrateurUnite = require("../../controllers/administrateurUnite
 const getAdministrateurUniteById = require("../../controllers/administrateurUnite/getAdminUniteByIdController");
 const updateAdministrateurUnite = require("../../controllers/administrateurUnite/updateAdminUniteController");
 
-const administrateurUniteValidation = require("../../validation/adminUniteValidation");
-const errorHandlerMiddleware = require("../../Middlewares/errorHandlerMiddleware");
+adminUnitRouter.use(authMiddleware);
 
 adminUnitRouter.post(
   "/",
@@ -18,12 +17,7 @@ adminUnitRouter.post(
 );
 adminUnitRouter.get("/", getAllAdministrateurUnite);
 adminUnitRouter.get("/:id", getAdministrateurUniteById);
-adminUnitRouter.put(
-  "/:id",
-  administrateurUniteValidation,
-  errorHandlerMiddleware,
-  updateAdministrateurUnite
-);
+adminUnitRouter.put("/:id", updateAdministrateurUnite);
 adminUnitRouter.delete("/:id", deleteAdministrateurUnite);
 
 module.exports = {adminUnitRouter};

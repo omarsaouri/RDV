@@ -1,6 +1,6 @@
 const supabase = require("../../models/supabase");
 
-const updateAdministrateurUnite = async (req, res) => {
+const modifierAdministrateurUnite = async (req, res) => {
   const { id } = req.params;
   const { nomComplet, email, password, idUnite } = req.body;
 
@@ -25,4 +25,4 @@ const updateAdministrateurUnite = async (req, res) => {
   }
 };
 
-module.exports = {updateAdministrateurUnite};
+module.exports = {modifierAdministrateurUnite};

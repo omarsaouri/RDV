@@ -14,7 +14,7 @@ const getAllUnites = async (req, res) => {
   }
 };
 
-const  GetUniteParId = async (req, res) => {
+const getUniteParId = async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -38,4 +38,4 @@ const  GetUniteParId = async (req, res) => {
   }
 };
 
-module.exports = { getAllUnites, GetUniteParId };
+module.exports = { getAllUnites, getUniteParId };

@@ -28,12 +28,19 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
+  Checkbox,
+  CheckboxGroup,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
 } from "@chakra-ui/react";
 import React, { useRef } from "react";
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 
-function SousAdminTab() {
+function AgendaTab() {
   const alertDialogDisclosure = useDisclosure();
   const modalDisclosure = useDisclosure();
   const cancelRef = useRef();
@@ -53,19 +60,18 @@ function SousAdminTab() {
   const onCloseModal = () => {
     modalDisclosure.onClose();
   };
-
   return (
     <>
       <div className="p-4 flex gap-2 flex-col">
-        <h2 className="font-bold text-3xl">Collectif</h2>
+        <h2 className="font-bold text-3xl">Agendas</h2>
 
         <SimpleGrid spacing={4}>
           <Card size="md" className="w-full" variant="elevated">
             <CardBody className="flex flex-wrap justify-between items-center gap-20">
-              <h2 className="font-bold">Ahmed Serghini</h2>
+              <h2 className="font-bold">idk</h2>
               <p>
-                Administareteur de l'unité{" "}
-                <span className="font-bold">blah blah </span>
+                Affecté à la specialité
+                <span className="font-bold"> idk</span>
               </p>
               <div className="flex gap-10">
                 <Button
@@ -86,7 +92,7 @@ function SousAdminTab() {
                   <AlertDialogOverlay>
                     <AlertDialogContent>
                       <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                        Supprimer un administrateur d'unité
+                        Supprimer cette spécialité
                       </AlertDialogHeader>
 
                       <AlertDialogBody>
@@ -123,17 +129,23 @@ function SousAdminTab() {
                 <Modal isOpen={modalDisclosure.isOpen} onClose={onCloseModal}>
                   <ModalOverlay />
                   <ModalContent>
-                    <ModalHeader>Modifier administrateur d'unité</ModalHeader>
+                    <ModalHeader>Modifier Agenda</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody className="flex flex-col gap-5">
-                      <Input placeholder="Nom Complet" />
-                      <Input placeholder="Email" />
-                      <Input placeholder="Mot de passe" />
-                      <Select placeholder="Choisir unité">
+                      <Input placeholder="Nom Agenda" />
+                      <Select placeholder="Choisir Spécialité">
                         <option value="option1">Option 1</option>
                         <option value="option2">Option 2</option>
                         <option value="option3">Option 3</option>
                       </Select>
+                      <h2>Quota max</h2>
+                      <NumberInput defaultValue={15} min={10} max={20}>
+                        <NumberInputField />
+                        <NumberInputStepper>
+                          <NumberIncrementStepper />
+                          <NumberDecrementStepper />
+                        </NumberInputStepper>
+                      </NumberInput>
                     </ModalBody>
 
                     <ModalFooter>
@@ -151,26 +163,29 @@ function SousAdminTab() {
           </Card>
         </SimpleGrid>
       </div>
-
       <Accordion allowToggle className="w-96">
         <AccordionItem>
           <h2>
             <AccordionButton className="w-10">
-              <span className="font-bold text-2xl">
-                Nouveau administrateur d'unité
-              </span>
+              <span className="font-bold text-2xl">Nouvel Agenda</span>
             </AccordionButton>
           </h2>
           <AccordionPanel pb={4}>
             <Stack spacing={3}>
-              <Input placeholder="Nom Complet" />
-              <Input placeholder="Email" />
-              <Input placeholder="Mot de passe" />
-              <Select placeholder="Choisir unité">
+              <Input placeholder="Nom Agenda" />
+              <Select placeholder="Choisir Spécialité">
                 <option value="option1">Option 1</option>
                 <option value="option2">Option 2</option>
                 <option value="option3">Option 3</option>
               </Select>
+              <h2>Quota max</h2>
+              <NumberInput defaultValue={15} min={10} max={20}>
+                <NumberInputField />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
               <Button colorScheme="blue">Créer</Button>
             </Stack>
           </AccordionPanel>
@@ -180,4 +195,4 @@ function SousAdminTab() {
   );
 }
 
-export default SousAdminTab;
+export default AgendaTab;

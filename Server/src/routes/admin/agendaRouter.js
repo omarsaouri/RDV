@@ -1,15 +1,20 @@
 const express = require("express");
-const agendaRouter = express.Router();
-const authMiddleware = require("../middlewares/authMiddleware");
-
 const {
-  addAgenda,
-  deleteAgenda,
-  updateAgenda,
+  ajouterAgenda,
+  supprimerAgenda,
+  modifierAgenda,
   getAllAgendas,
   getAgendaParId,
-} = require("../controllers/agenda");
+} = require("../../controllers/agenda/getAgendaController");
+const {
+  modifierAgenda,
+} = require("../../controllers/agenda/modifierAgendaController");
+const {
+  supprimerAgenda,
+} = require("../../controllers/agenda/supprimerAgendaController");
+const agendaRouter = express.Router();
 
+// Apply authentication middleware to all routes
 agendaRouter.use(authMiddleware);
 
 agendaRouter.post("/", addAgenda);

@@ -6,7 +6,8 @@ const addAdministrateurUnite = async (req, res) => {
   try {
     const { data, error } = await supabase
       .from("AdministrateurUnite")
-      .insert([{ nomComplet, email, password, idUnite }]);
+      .insert([{ nomComplet, email, password, idUnite }])
+      .select("*");
 
     if (error) {
       throw error;
