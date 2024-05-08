@@ -20,4 +20,4 @@ const modifierUnite = async (req, res) => {
   }
 };
 
-module.exports = modifierUnite;
+module.exports = { modifierUnite };

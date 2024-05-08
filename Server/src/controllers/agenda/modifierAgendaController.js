@@ -20,4 +20,4 @@ const modifierAgenda = async (req, res) => {
   }
 };
 
-module.exports = modifierAgenda;
+module.exports = { modifierAgenda };

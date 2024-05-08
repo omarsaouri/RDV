@@ -16,4 +16,4 @@ const ajouterUnite = async (req, res) => {
   }
 };
 
-module.exports = ajouterUnite;
+module.exports = { ajouterUnite };

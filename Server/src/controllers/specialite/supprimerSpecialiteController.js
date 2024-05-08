@@ -16,4 +16,4 @@ const supprimerSpecialite = async (req, res) => {
   }
 };
 
-module.exports = supprimerSpecialite;
+module.exports = { supprimerSpecialite };

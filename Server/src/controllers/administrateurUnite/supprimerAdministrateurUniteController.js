@@ -21,4 +21,4 @@ const supprimerAdministrateurUnite = async (req, res) => {
   }
 };
 
-module.exports = supprimerAdministrateurUnite;
+module.exports = [supprimerAdministrateurUnite];

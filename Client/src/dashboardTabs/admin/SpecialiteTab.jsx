@@ -28,12 +28,14 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
+  Checkbox,
+  CheckboxGroup,
 } from "@chakra-ui/react";
 import React, { useRef } from "react";
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 
-function SousAdminTab() {
+function SpecialiteTab() {
   const alertDialogDisclosure = useDisclosure();
   const modalDisclosure = useDisclosure();
   const cancelRef = useRef();
@@ -53,19 +55,18 @@ function SousAdminTab() {
   const onCloseModal = () => {
     modalDisclosure.onClose();
   };
-
   return (
     <>
       <div className="p-4 flex gap-2 flex-col">
-        <h2 className="font-bold text-3xl">Collectif</h2>
+        <h2 className="font-bold text-3xl">Spécialités</h2>
 
         <SimpleGrid spacing={4}>
           <Card size="md" className="w-full" variant="elevated">
             <CardBody className="flex flex-wrap justify-between items-center gap-20">
-              <h2 className="font-bold">Ahmed Serghini</h2>
+              <h2 className="font-bold">idk</h2>
               <p>
-                Administareteur de l'unité{" "}
-                <span className="font-bold">blah blah </span>
+                Affecté à l'unité{" "}
+                <span className="font-bold">Consultation </span>
               </p>
               <div className="flex gap-10">
                 <Button
@@ -86,7 +87,7 @@ function SousAdminTab() {
                   <AlertDialogOverlay>
                     <AlertDialogContent>
                       <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                        Supprimer un administrateur d'unité
+                        Supprimer cette spécialité
                       </AlertDialogHeader>
 
                       <AlertDialogBody>
@@ -123,17 +124,26 @@ function SousAdminTab() {
                 <Modal isOpen={modalDisclosure.isOpen} onClose={onCloseModal}>
                   <ModalOverlay />
                   <ModalContent>
-                    <ModalHeader>Modifier administrateur d'unité</ModalHeader>
+                    <ModalHeader>Modifier Spécialité</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody className="flex flex-col gap-5">
-                      <Input placeholder="Nom Complet" />
-                      <Input placeholder="Email" />
-                      <Input placeholder="Mot de passe" />
-                      <Select placeholder="Choisir unité">
+                      <Input placeholder="Nom Spécialité" />
+                      <Select placeholder="Choisir Unité">
                         <option value="option1">Option 1</option>
                         <option value="option2">Option 2</option>
                         <option value="option3">Option 3</option>
                       </Select>
+                      <CheckboxGroup
+                        colorScheme="green"
+                        defaultValue={["naruto", "kakashi"]}
+                      >
+                        <h2 className="font-bold">Agendas</h2>
+                        <Stack spacing={[1, 5]} direction={["column", "row"]}>
+                          <Checkbox value="naruto">Naruto</Checkbox>
+                          <Checkbox value="sasuke">Sasuke</Checkbox>
+                          <Checkbox value="kakashi">Kakashi</Checkbox>
+                        </Stack>
+                      </CheckboxGroup>
                     </ModalBody>
 
                     <ModalFooter>
@@ -151,26 +161,33 @@ function SousAdminTab() {
           </Card>
         </SimpleGrid>
       </div>
-
       <Accordion allowToggle className="w-96">
         <AccordionItem>
           <h2>
             <AccordionButton className="w-10">
-              <span className="font-bold text-2xl">
-                Nouveau administrateur d'unité
-              </span>
+              <span className="font-bold text-2xl">Nouvelle spécialité</span>
             </AccordionButton>
           </h2>
           <AccordionPanel pb={4}>
             <Stack spacing={3}>
-              <Input placeholder="Nom Complet" />
-              <Input placeholder="Email" />
-              <Input placeholder="Mot de passe" />
-              <Select placeholder="Choisir unité">
+              <Input placeholder="Nom spécialite" />
+              <Select placeholder="Choisir Unité">
                 <option value="option1">Option 1</option>
                 <option value="option2">Option 2</option>
                 <option value="option3">Option 3</option>
               </Select>
+
+              <CheckboxGroup
+                colorScheme="green"
+                defaultValue={["naruto", "kakashi"]}
+              >
+                <h2 className="font-bold">Specialité</h2>
+                <Stack spacing={[1, 5]} direction={["column", "row"]}>
+                  <Checkbox value="naruto">Naruto</Checkbox>
+                  <Checkbox value="sasuke">Sasuke</Checkbox>
+                  <Checkbox value="kakashi">Kakashi</Checkbox>
+                </Stack>
+              </CheckboxGroup>
               <Button colorScheme="blue">Créer</Button>
             </Stack>
           </AccordionPanel>
@@ -180,4 +197,4 @@ function SousAdminTab() {
   );
 }
 
-export default SousAdminTab;
+export default SpecialiteTab;

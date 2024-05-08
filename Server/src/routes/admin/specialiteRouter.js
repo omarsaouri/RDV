@@ -1,16 +1,20 @@
 const express = require("express");
-const specialiteRouter = express.Router();
-const authMiddleware = require("../middlewares/authMiddleware");
-
 const {
   ajouterSpecialite,
-  supprimerSpecialite,
-  modifierSpecialite,
+} = require("../../controllers/specialite/ajouterSpecialiteController");
+const {
   getAllSpecialites,
   getSpecialiteParId,
-} = require("../controllers/specialite");
+} = require("../../controllers/specialite/getSpecialiteController");
+const {
+  supprimerSpecialite,
+} = require("../../controllers/specialite/supprimerSpecialiteController");
+const {
+  modifierSpecialite,
+} = require("../../controllers/specialite/modifierSpecialiteController");
+const specialiteRouter = express.Router();
 
-specialiteRouter.use(authMiddleware);
+// specialiteRouter.use(authMiddleware);
 
 specialiteRouter.post("/", ajouterSpecialite);
 specialiteRouter.get("/", getAllSpecialites);

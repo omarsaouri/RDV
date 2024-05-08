@@ -16,4 +16,4 @@ const supprimerUnite = async (req, res) => {
   }
 };
 
-module.exports = supprimerUnite;
+module.exports = { supprimerUnite };

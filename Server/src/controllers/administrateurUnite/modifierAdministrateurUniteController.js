@@ -25,4 +25,4 @@ const modifierAdministrateurUnite = async (req, res) => {
   }
 };
 
-module.exports = modifierAdministrateurUnite;
+module.exports = { modifierAdministrateurUnite };
