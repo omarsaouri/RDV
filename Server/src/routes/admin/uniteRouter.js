@@ -1,5 +1,8 @@
 const express = require("express");
 const {
+  ajouterUnite,
+  supprimerUnite,
+  modifierUnite,
   getAllUnites,
   getUniteParId,
 } = require("../../controllers/unite/getUniteController");
@@ -16,9 +19,9 @@ const uniteRouter = express.Router();
 
 // uniteRouter.use(authMiddleware);
 
-uniteRouter.post("/", ajouterUnite);
+uniteRouter.post("/", addUnite);
 uniteRouter.get("/", getAllUnites);
-uniteRouter.get("/:id", getUniteParId);
+uniteRouter.get("/:id", getAllParId);
 uniteRouter.put("/:id", modifierUnite);
 uniteRouter.delete("/:id", supprimerUnite);
 

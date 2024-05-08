@@ -6,8 +6,7 @@ const ajouterSpecialite = async (req, res) => {
   try {
     const { data, error } = await supabase
       .from("Specialite")
-      .insert([{ nomSpecialite, idUnite }])
-      .select("*");
+      .insert([{ nomSpecialite, idUnite }]);
 
     if (error) {
       throw error;
@@ -16,7 +15,6 @@ const ajouterSpecialite = async (req, res) => {
     res.status(201).json({ message: "Specialite ajoutée avec succès", data });
   } catch (error) {
     res.status(500).json({ error: "Échec de l'ajout de la Specialite" });
-    console.log(error);
   }
 };
 

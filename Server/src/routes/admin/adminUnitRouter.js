@@ -4,25 +4,19 @@ const {
   getAllAdministrateurUnite,
 } = require("../../controllers/administrateurUnite/getAdministrateurUniteController");
 const {
+  ajouterAdministrateurUnite,
+  supprimerAdministrateurUnite,
   modifierAdministrateurUnite,
-} = require("../../controllers/administrateurUnite/modifierAdministrateurUniteController");
-const supprimerAdministrateurUniteController = require("../../controllers/administrateurUnite/supprimerAdministrateurUniteController");
-const adminUnitRouter = express.Router();
-
-// const {
-//   ajouterAdministrateurUnite,
-//   supprimerAdministrateurUnite,
-//   modifierAdministrateurUnite,
-//   getAllAdministrateurUnite,
-//   getAdministrateurUniteById,
-// } = require("../../controllers/administrateurUnite");
+  getAllAdministrateurUnite,
+  getAdministrateurUniteById,
+} = require("../controllers/administrateurUnite");
 
 // adminUnitRouter.use(authMiddleware);
 
-adminUnitRouter.post("/", ajouterAdministrateurUnite);
+adminUnitRouter.post("/", addAdministrateurUnite);
 adminUnitRouter.get("/", getAllAdministrateurUnite);
-adminUnitRouter.get("/:id", getAllAdministrateurUnite);
+adminUnitRouter.get("/:id", getAdministrateurUniteById);
 adminUnitRouter.put("/:id", modifierAdministrateurUnite);
-adminUnitRouter.delete("/:id", supprimerAdministrateurUniteController);
+adminUnitRouter.delete("/:id", supprimerAdministrateurUnite);
 
 module.exports = adminUnitRouter;
