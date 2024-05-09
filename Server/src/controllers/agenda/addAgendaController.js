@@ -18,4 +18,4 @@ const ajouterAgenda = async (req, res) => {
   }
 };
 
-module.exports = { ajouterAgenda };
+module.exports = ajouterAgenda;

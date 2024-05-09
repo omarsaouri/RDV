@@ -5,11 +5,11 @@ require("dotenv").config();
 const port = process.env.PORT;
 const cors = require("cors");
 const supabase = require("./src/models/supabase");
-const authRouter = require("./src/routes/auth/authRouter");
 const adminUnitRouter = require("./src/routes/admin/adminUnitRouter");
 const agendaRouter = require("./src/routes/admin/agendaRouter");
 const specialiteRouter = require("./src/routes/admin/specialiteRouter");
 const uniteRouter = require("./src/routes/admin/uniteRouter");
+const authRouter = require("./src/routes/auth/authRouter");
 
 app.use(cors());
 app.use(express.json());

@@ -28,4 +28,4 @@ const getAdministrateurUniteById = async (req, res) => {
   }
 };
 
-module.exports = {getAdministrateurUniteById};
+module.exports = getAdministrateurUniteById;

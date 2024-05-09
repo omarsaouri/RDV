@@ -23,4 +23,4 @@ const addAdministrateurUnite = async (req, res) => {
   }
 };
 
-module.exports = {addAdministrateurUnite};
+module.exports = addAdministrateurUnite;

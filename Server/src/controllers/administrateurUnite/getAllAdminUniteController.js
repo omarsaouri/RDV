@@ -18,4 +18,4 @@ const getAllAdministrateurUnite = async (req, res) => {
   }
 };
 
-module.exports = { getAllAdministrateurUnite};
+module.exports = getAllAdministrateurUnite;

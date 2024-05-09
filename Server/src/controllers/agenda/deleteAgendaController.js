@@ -16,4 +16,4 @@ const supprimerAgenda = async (req, res) => {
   }
 };
 
-module.exports = { supprimerAgenda };
+module.exports = supprimerAgenda;

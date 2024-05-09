@@ -20,4 +20,4 @@ const modifierSpecialite = async (req, res) => {
   }
 };
 
-module.exports = { modifierSpecialite };
+module.exports = modifierSpecialite;

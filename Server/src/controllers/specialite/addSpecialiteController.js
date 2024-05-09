@@ -1,6 +1,6 @@
 const supabase = require("../../models/supabase");
 
-const ajouterSpecialite = async (req, res) => {
+const addSpecialite = async (req, res) => {
   const { nomSpecialite, idUnite } = req.body;
 
   try {
@@ -18,4 +18,4 @@ const ajouterSpecialite = async (req, res) => {
   }
 };
 
-module.exports = {addSpecialite};
+module.exports = addSpecialite;

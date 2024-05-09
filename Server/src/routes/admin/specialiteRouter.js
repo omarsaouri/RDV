@@ -1,25 +1,17 @@
 const express = require("express");
+const specialiteRouter = express.Router();
+const addSpecialite = require("../../controllers/specialite/addSpecialiteController");
 const {
-  ajouterSpecialite,
-  supprimerSpecialite,
-  modifierSpecialite,
   getAllSpecialites,
   getSpecialiteParId,
 } = require("../../controllers/specialite/getSpecialiteController");
-const {
-  supprimerSpecialite,
-} = require("../../controllers/specialite/supprimerSpecialiteController");
-const {
-  modifierSpecialite,
-} = require("../../controllers/specialite/modifierSpecialiteController");
-const specialiteRouter = express.Router();
-
-// specialiteRouter.use(authMiddleware);
+const modifierSpecialite = require("../../controllers/specialite/updateSpecialiteController");
+const supprimerSpecialite = require("../../controllers/specialite/deleteSpecialiteController");
 
 specialiteRouter.post("/", addSpecialite);
 specialiteRouter.get("/", getAllSpecialites);
 specialiteRouter.get("/:id", getSpecialiteParId);
-specialiteRouter.put("/:id", updateSpecialite);
-specialiteRouter.delete("/:id", deleteSpecialite);
+specialiteRouter.put("/:id", modifierSpecialite);
+specialiteRouter.delete("/:id", supprimerSpecialite);
 
 module.exports = specialiteRouter;

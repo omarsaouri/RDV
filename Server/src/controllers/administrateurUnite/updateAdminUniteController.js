@@ -25,4 +25,4 @@ const updateAdministrateurUnite = async (req, res) => {
   }
 };
 
-module.exports = {updateAdministrateurUnite};
+module.exports = updateAdministrateurUnite;
