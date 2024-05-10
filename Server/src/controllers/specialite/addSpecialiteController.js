@@ -6,7 +6,9 @@ const addSpecialite = async (req, res) => {
   try {
     const { data, error } = await supabase
       .from("Specialite")
-      .insert([{ nomSpecialite, idUnite }]);
+      .insert([{ nomSpecialite, idUnite }])
+      .single();
+
 
     if (error) {
       throw error;

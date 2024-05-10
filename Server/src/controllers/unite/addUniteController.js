@@ -1,10 +1,11 @@
 const supabase = require("../../models/supabase");
 
-const ajouterUnite = async (req, res) => {
+const addUnite = async (req, res) => {
   const { nomUnite } = req.body;
 
   try {
-    const { data, error } = await supabase.from("Unite").insert([{ nomUnite }]);
+    const { data, error } = await supabase.from("Unite").insert([{ nomUnite }]).single();
+    ;
 
     if (error) {
       throw error;
@@ -16,4 +17,4 @@ const ajouterUnite = async (req, res) => {
   }
 };
 
-module.exports = ajouterUnite;
+module.exports = addUnite;

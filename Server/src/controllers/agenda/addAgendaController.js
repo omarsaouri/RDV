@@ -1,21 +1,22 @@
 const supabase = require("../../models/supabase");
 
-const ajouterAgenda = async (req, res) => {
+const addAgenda = async (req, res) => {
   const { nomAgenda, quotaMax, idSpecialite } = req.body;
 
   try {
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from("Agenda")
-      .insert([{ nomAgenda, quotaMax, idSpecialite }]);
+      .insert([{ nomAgenda, quotaMax, idSpecialite }])
+      .single();
 
     if (error) {
       throw error;
     }
 
-    res.status(201).json({ message: "Agenda ajouté avec succès", data });
+    res.status(201).json({ message: "Agenda ajouté avec succès"});
   } catch (error) {
     res.status(500).json({ error: "Échec de l'ajout de l'Agenda" });
   }
 };
 
-module.exports = ajouterAgenda;
+module.exports = addAgenda;

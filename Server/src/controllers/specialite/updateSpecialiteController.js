@@ -1,6 +1,6 @@
 const supabase = require("../../models/supabase");
 
-const modifierSpecialite = async (req, res) => {
+const updateSpecialite = async (req, res) => {
   const { id } = req.params;
   const { nomSpecialite, idUnite } = req.body;
 
@@ -8,7 +8,8 @@ const modifierSpecialite = async (req, res) => {
     const { data, error } = await supabase
       .from("Specialite")
       .update({ nomSpecialite, idUnite })
-      .eq("id", id);
+      .eq("id", id)
+      .single();
 
     if (error) {
       throw error;
@@ -20,4 +21,4 @@ const modifierSpecialite = async (req, res) => {
   }
 };
 
-module.exports = modifierSpecialite;
+module.exports = updateSpecialite;
