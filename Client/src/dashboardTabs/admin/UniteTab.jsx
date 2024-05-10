@@ -31,7 +31,7 @@ import {
   Checkbox,
   CheckboxGroup,
 } from "@chakra-ui/react";
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 
@@ -55,6 +55,7 @@ function UniteTab() {
   const onCloseModal = () => {
     modalDisclosure.onClose();
   };
+
   return (
     <>
       <div className="p-4 flex gap-2 flex-col">

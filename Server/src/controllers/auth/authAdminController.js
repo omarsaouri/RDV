@@ -28,7 +28,7 @@ const loginAdmin = async (req, res) => {
     const adminPayload = {
       id: foundAdmin.email,
     };
-    const access_token = jwt.sign(adminPayload, process.env.JWT_SECRET);
+    const access_token = jwt.sign(adminPayload, process.env.JWT_SECRET_ADMIN);
 
     res.status(200).json({ admin: foundAdmin, access_token: access_token });
   } catch (error) {
