@@ -3,37 +3,35 @@ import {
   AccordionButton,
   AccordionItem,
   AccordionPanel,
-  Input,
-  Select,
-  Stack,
-  Button,
-  SimpleGrid,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Heading,
   AlertDialog,
   AlertDialogBody,
+  AlertDialogContent,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogContent,
   AlertDialogOverlay,
-  AlertDialogCloseButton,
-  useDisclosure,
+  Button,
+  Card,
+  CardBody,
+  Input,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Select,
+  SimpleGrid,
+  Stack,
+  useDisclosure,
 } from "@chakra-ui/react";
-import React, { useRef, useEffect, useState } from "react";
-import { MdDelete } from "react-icons/md";
-import { MdEdit } from "react-icons/md";
+import React, { useEffect, useRef, useState } from "react";
+import { MdDelete, MdEdit } from "react-icons/md";
 import getAllAdminUnite from "../../api/modules/admin/adminUniteModules/getAllAdminUnite";
+import getAllUnites from "../../api/modules/admin/uniteModules/getAllUnites";
 import getUnite from "../../api/modules/admin/uniteModules/getUnite";
+import addAdminUnite from "../../api/modules/admin/adminUniteModules/addAdminUnite";
+import putAdminUnite from "../../api/modules/admin/adminUniteModules/putAdminUnite";
 
 function SousAdminTab() {
   const alertDialogDisclosure = useDisclosure();
@@ -41,6 +39,8 @@ function SousAdminTab() {
   const cancelRef = useRef();
   const [adminsUnite, setAdminsUnite] = useState([]);
   const [uniteNames, setUniteNames] = useState([]);
+  const [unites, setUnites] = useState([]);
+  const [selectedUnitId, setSelectedUnitId] = useState("");
   const [nomComplet, setNomComplet] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -59,6 +59,10 @@ function SousAdminTab() {
 
   const onCloseModal = () => {
     modalDisclosure.onClose();
+  };
+
+  const handleSelectChange = (event) => {
+    setSelectedUnitId(event.target.value);
   };
 
   const fetchAdminUnite = async () => {
@@ -84,7 +88,6 @@ function SousAdminTab() {
       adminsUnite.map(async (adminUnite) => {
         try {
           const unitDetails = await fetchUnite(adminUnite.idUnite.toString());
-          console.log(unitDetails.nomUnite);
           return unitDetails.nomUnite;
         } catch (error) {
           console.error("Error fetching unit details:", error);
@@ -95,17 +98,63 @@ function SousAdminTab() {
     setUniteNames(names);
   };
 
+  const fetchAllUnites = async () => {
+    try {
+      const response = await getAllUnites();
+      setUnites(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleAddAdminUnite = async () => {
+    try {
+      const response = await addAdminUnite(
+        nomComplet,
+        email,
+        password,
+        selectedUnitId
+      );
+      console.log(response);
+      setNomComplet("");
+      setEmail("");
+      setPassword("");
+      setSelectedUnitId("");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handlePutAdminUnite = async (
+    id,
+    nomComplet,
+    email,
+    password,
+    selectedUnitId
+  ) => {
+    try {
+      const response = await putAdminUnite(
+        id,
+        nomComplet,
+        email,
+        password,
+        selectedUnitId
+      );
+      console.log(response);
+      onCloseModal();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     fetchAdminUnite();
+    fetchAllUnites();
   }, []);
 
   useEffect(() => {
     fetchUniteNames();
   }, [adminsUnite]);
-
-  useEffect(() => {
-    console.log(nomComplet);
-  }, [nomComplet]);
 
   return (
     <>
@@ -185,13 +234,37 @@ function SousAdminTab() {
                       <ModalHeader>Modifier administrateur d'unité</ModalHeader>
                       <ModalCloseButton />
                       <ModalBody className="flex flex-col gap-5">
-                        <Input placeholder="Nom Complet" />
-                        <Input placeholder="Email" />
-                        <Input placeholder="Mot de passe" />
-                        <Select placeholder="Choisir unité">
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
+                        <Input
+                          placeholder={adminUnite.nomComplet}
+                          value={nomComplet}
+                          onChange={(e) => {
+                            setNomComplet(e.target.value);
+                          }}
+                        />
+                        <Input
+                          placeholder={adminUnite.email}
+                          value={email}
+                          onChange={(e) => {
+                            setEmail(e.target.value);
+                          }}
+                        />
+                        <Input
+                          placeholder={adminUnite.password}
+                          value={password}
+                          onChange={(e) => {
+                            setPassword(e.target.value);
+                          }}
+                        />
+                        <Select
+                          placeholder="Choisir unité"
+                          value={adminUnite.uniteId}
+                          onChange={handleSelectChange}
+                        >
+                          {unites.map((unite) => (
+                            <option key={unite.id} value={unite.id}>
+                              {unite.nomUnite} {/*TODO: FIX THIS*/}
+                            </option>
+                          ))}
                         </Select>
                       </ModalBody>
 
@@ -199,7 +272,18 @@ function SousAdminTab() {
                         <Button colorScheme="red" mr={3} onClick={onCloseModal}>
                           Annuler
                         </Button>
-                        <Button colorScheme="blue" onClick={onCloseModal}>
+                        <Button
+                          colorScheme="blue"
+                          onClick={() => {
+                            handlePutAdminUnite(
+                              adminUnite.id,
+                              nomComplet,
+                              email,
+                              password,
+                              selectedUnitId
+                            );
+                          }}
+                        >
                           Sauvegarder
                         </Button>
                       </ModalFooter>
@@ -244,12 +328,20 @@ function SousAdminTab() {
                   setPassword(e.target.value);
                 }}
               />
-              <Select placeholder="Choisir unité">
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
+              <Select
+                placeholder="Choisir unité"
+                value={selectedUnitId}
+                onChange={handleSelectChange}
+              >
+                {unites.map((unite) => (
+                  <option key={unite.id} value={unite.id}>
+                    {unite.nomUnite}
+                  </option>
+                ))}
               </Select>
-              <Button colorScheme="blue">Créer</Button>
+              <Button colorScheme="blue" onClick={handleAddAdminUnite}>
+                Créer
+              </Button>
             </Stack>
           </AccordionPanel>
         </AccordionItem>
