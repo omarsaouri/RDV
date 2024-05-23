@@ -32,6 +32,7 @@ import getAllUnites from "../../api/modules/admin/uniteModules/getAllUnites";
 import getUnite from "../../api/modules/admin/uniteModules/getUnite";
 import addAdminUnite from "../../api/modules/admin/adminUniteModules/addAdminUnite";
 import putAdminUnite from "../../api/modules/admin/adminUniteModules/putAdminUnite";
+import deleteAdminUnite from "../../api/modules/admin/adminUniteModules/deleteAdminUnite";
 
 function SousAdminTab() {
   const alertDialogDisclosure = useDisclosure();
@@ -147,6 +148,17 @@ function SousAdminTab() {
     }
   };
 
+  const handleDeleteAdminUnite = async (id) => {
+    try {
+      const response = await deleteAdminUnite(id);
+
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+    onCloseAlertDialog();
+  };
+
   useEffect(() => {
     fetchAdminUnite();
     fetchAllUnites();
@@ -208,7 +220,9 @@ function SousAdminTab() {
                           </Button>
                           <Button
                             colorScheme="red"
-                            onClick={onCloseAlertDialog}
+                            onClick={() => {
+                              handleDeleteAdminUnite(adminUnite.id);
+                            }}
                             ml={3}
                           >
                             Supprimer

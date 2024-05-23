@@ -3,37 +3,33 @@ import {
   AccordionButton,
   AccordionItem,
   AccordionPanel,
-  Input,
-  Select,
-  Stack,
-  Button,
-  SimpleGrid,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Heading,
   AlertDialog,
   AlertDialogBody,
+  AlertDialogContent,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogContent,
   AlertDialogOverlay,
-  AlertDialogCloseButton,
-  useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
+  Button,
+  Card,
+  CardBody,
   Checkbox,
   CheckboxGroup,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Select,
+  SimpleGrid,
+  Stack,
+  useDisclosure,
 } from "@chakra-ui/react";
-import React, { useRef, useEffect, useState } from "react";
-import { MdDelete } from "react-icons/md";
-import { MdEdit } from "react-icons/md";
+import React, { useEffect, useRef } from "react";
+import { MdDelete, MdEdit } from "react-icons/md";
+import getAllUnites from "../../api/modules/admin/uniteModules/getAllUnites";
 
 function UniteTab() {
   const alertDialogDisclosure = useDisclosure();
@@ -55,6 +51,19 @@ function UniteTab() {
   const onCloseModal = () => {
     modalDisclosure.onClose();
   };
+
+  const fetchAllUnites = async () => {
+    try {
+      const response = await getAllUnites();
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllUnites();
+  }, []);
 
   return (
     <>
@@ -161,6 +170,7 @@ function UniteTab() {
           </Card>
         </SimpleGrid>
       </div>
+
       <Accordion allowToggle className="w-96">
         <AccordionItem>
           <h2>

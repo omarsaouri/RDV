@@ -1,5 +1,5 @@
 import adminAxios from "../../../configs/adminAxios";
-const putAdminUnite = async (id, nomComplet, email, password, idUnite) => {
+const putAdminUnite = (id, nomComplet, email, password, idUnite) => {
   return adminAxios.put(`/adminUnite/${id}`, {
     nomComplet,
     email,
