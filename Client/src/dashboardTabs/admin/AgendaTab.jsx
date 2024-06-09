@@ -42,6 +42,8 @@ import { MdEdit } from "react-icons/md";
 import getAllSpecialite from "../../api/modules/admin/specialiteModules/getAllSpecialite";
 import addAgenda from "../../api/modules/admin/agendaModules/addAgenda";
 import getAllAgenda from "../../api/modules/admin/agendaModules/getAllAgenda";
+import deleteAgenda from "../../api/modules/admin/agendaModules/deleteAgenda";
+import getSpecialite from "../../api/modules/admin/specialiteModules/getSpecialite";
 
 function AgendaTab() {
   const alertDialogDisclosure = useDisclosure();
@@ -52,6 +54,7 @@ function AgendaTab() {
   const [selectedSpecialiteId, setSelectedSpecialiteId] = useState();
   const [specialites, setSpecialites] = useState([]);
   const [agendas, setAgendas] = useState([]);
+  const [specialitesNames, setSpecialitesNames] = useState([]);
 
   const onOpenAlertDialog = () => {
     alertDialogDisclosure.onOpen();
@@ -76,21 +79,46 @@ function AgendaTab() {
   const fetchAllSpecialite = async () => {
     try {
       const response = await getAllSpecialite();
-
       setSpecialites(response.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const fetchAllAgenda = async () => {
+  const fetchAllAgendas = async () => {
     try {
       const response = await getAllAgenda();
-      console.log(response.data);
       setAgendas(response.data);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const fetchSpecialite = async (specialiteId) => {
+    try {
+      const response = await getSpecialite(specialiteId);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchSpecialiteNames = async () => {
+    const names = await Promise.all(
+      agendas.map(async (agenda) => {
+        try {
+          const specialiteDetails = await fetchSpecialite(
+            agenda.idSpecialite.toString()
+          );
+          return specialiteDetails.nomSpecialite;
+        } catch (error) {
+          console.error("Error fetching agenda details:", error);
+          return "";
+        }
+      })
+    );
+    setSpecialitesNames(names);
+    console.log(specialitesNames);
   };
 
   const handleAddAgenda = async () => {
@@ -105,10 +133,24 @@ function AgendaTab() {
     }
   };
 
+  const handleDeleteAgenda = async (agendaId) => {
+    try {
+      const response = await deleteAgenda(agendaId);
+      onCloseAlertDialog();
+    } catch (error) {
+      console.log(error);
+      onCloseAlertDialog();
+    }
+  };
+
   useEffect(() => {
     fetchAllSpecialite();
-    fetchAllAgenda();
+    fetchAllAgendas();
   }, []);
+
+  useEffect(() => {
+    fetchSpecialiteNames();
+  }, [specialites]);
 
   return (
     <>
@@ -116,13 +158,13 @@ function AgendaTab() {
         <h2 className="font-bold text-3xl">Agendas</h2>
 
         <SimpleGrid spacing={4}>
-          {agendas.map((agenda) => {
+          {agendas.map((agenda, index) => (
             <Card size="md" className="w-full" variant="elevated">
               <CardBody className="flex flex-wrap justify-between items-center gap-20">
                 <h2 className="font-bold">{agenda.nomAgenda}</h2>
                 <p>
                   Affecté à la specialité
-                  <span className="font-bold"></span>
+                  <span className="font-bold"> {specialitesNames[index]}</span>
                 </p>
                 <div className="flex gap-10">
                   <Button
@@ -157,7 +199,9 @@ function AgendaTab() {
                           </Button>
                           <Button
                             colorScheme="red"
-                            onClick={onCloseAlertDialog}
+                            onClick={() => {
+                              handleDeleteAgenda(agenda.id);
+                            }}
                             ml={3}
                           >
                             Supprimer
@@ -183,14 +227,27 @@ function AgendaTab() {
                       <ModalHeader>Modifier Agenda</ModalHeader>
                       <ModalCloseButton />
                       <ModalBody className="flex flex-col gap-5">
-                        <Input placeholder="Nom Agenda" />
-                        <Select placeholder="Choisir Spécialité">
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
+                        <Input
+                          placeholder="Nom Agenda"
+                          placeholder={agenda.nomAgenda}
+                        />
+                        <Select
+                          placeholder="Choisir Spécialité"
+                          value={agenda.idSpecialite}
+                          onChange={handleSelectChange}
+                        >
+                          {specialites.map((specialite) => (
+                            <option key={specialite.id} value={specialite.id}>
+                              {specialite.nomSpecialite} {/*TODO: FIX THIS*/}
+                            </option>
+                          ))}
                         </Select>
                         <h2>Quota max</h2>
-                        <NumberInput defaultValue={15} min={10} max={20}>
+                        <NumberInput
+                          defaultValue={agenda.quotaMax}
+                          min={10}
+                          max={20}
+                        >
                           <NumberInputField />
                           <NumberInputStepper>
                             <NumberIncrementStepper />
@@ -211,8 +268,8 @@ function AgendaTab() {
                   </Modal>
                 </div>
               </CardBody>
-            </Card>;
-          })}
+            </Card>
+          ))}
         </SimpleGrid>
       </div>
       <Accordion allowToggle className="w-96">

@@ -151,7 +151,6 @@ function SousAdminTab() {
   const handleDeleteAdminUnite = async (id) => {
     try {
       const response = await deleteAdminUnite(id);
-
       console.log(response);
     } catch (error) {
       console.log(error);
